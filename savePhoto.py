@@ -8,15 +8,14 @@ class DownPhotos(object):
     def __init__(self, urls, path):
         self.urls = urls
         self.path = path
-    def storePath(self,url):
-        self.filePath='./'+self.path+url.split('/')[-1]
-        #return self.filePath
+    def createStorePath(self,url):
+        return './'+self.path+url.split('/')[-1]
     def save(self):
         for imgUrl in self.urls:
-            self.storePath(imgUrl)
+            filePath = self.createStorePath(imgUrl)
             if not os.path.exists(self.path):
                 os.makedirs(self.path)
-            if not os.path.exists(self.filePath):
-                request.urlretrieve(imgUrl, self.filePath)
+            if not os.path.exists(filePath):
+                request.urlretrieve(imgUrl, filePath)
             else:
                 print('File Exist')
